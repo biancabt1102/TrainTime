@@ -5,41 +5,30 @@
 O sistema funcionará por meio de um aplicativo que será instalado no celular do aluno. Esse aplicativo irá sicronizar com o sistema da academia, permitindo que o aluno acesse seu treino diário e obtenha orientação do instrutor na própria academia para realizar os exercícios de forma correta.
 </i>
 
+<hr>
+
 ## Endpoints
 
-### Avaliador
+<h3 style="font-size: 18px"> Avaliador </h3>
+
 - Avaliação
     - [Cadastrar](#cadastrar-avaliação)
     - [Listar todos](#listar-avaliação)
     - [Alterar](#alterar-avaliação)
     - [Detalhes](#detalhes-avaliação)
 
-### Aluno
-- Nome do exercício
-    - Listar todos
-    - Detalhes
+<h3 style="font-size: 18px"> Aluno </h3>
 
-- Repetição
-    - Alterar
-    - Detalhes
+- Exercícios
+    - [Listar todos](#listar-exercícios)
+    - [Detalhes](#detalhes-exercícios)
+    - [Alterar](#alterar-exercícios)
+  
+<hr>
 
-- Carga
-    - Cadastrar
-    - Listar todos
-    - Alterar
-    - Detalhes
+### Cadastrar Avaliação 
 
-- Categoria
-    - Listar todos
-    - Detalhes
-    
-- Intervalo
-    - Cadastrar
-    - Alterar
-    - Detalhes
-    
-#### Cadastrar Avaliação
-`POST` /traintime/api/avaliacao
+`POST` /traintime/api/avaliador/avaliacao
 
 *Campos da requisição*
 
@@ -56,6 +45,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "nomeExercicio": 'Remada baixa',
     "repeticao": 15,
     "serie": 3,
+    "carga": null,
+    "intervalo": null,
     "categoriaId": {
         id: 1,
         "nome": "Treinamento de força"
@@ -73,10 +64,11 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |201| Avaliação criada com sucesso|
 |400| Avaliação inválida|
 
+<hr>
 
-#### Alterar Avaliação
+### Alterar Avaliação
 
-`PUT` /traintime/api/avaliacao/{id}
+`PUT` /traintime/api/avaliador/avaliacao/{id}
 
 *Campos de requisição*
 
@@ -93,6 +85,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "nomeExercicio": 'Remada Baixa',
     "repeticao": 15,
     "serie": 3,
+    "carga": null,
+    "intervalo": null,
     "categoriaId": {
         "id": 2,
         "nome": "Cardiovascular"
@@ -111,9 +105,11 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |400| Alteração inválida|
 |404| Avaliação não encontrada|
 
-#### Listar Avaliação
+<hr>
 
-`GET` /traintime/api/avaliacao
+### Listar Avaliação
+
+`GET` /traintime/api/avaliador/avaliacao
 
 *Exemplo de resposta*
 
@@ -131,6 +127,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "nomeExercicio": 'Remada Baixa',
         "repeticao": 15,
         "serie": 3,
+        "carga": null,
+        "intervalo": null,
         "categoria": {
             "id": 2,
             "nome": "Cardiovascular"
@@ -145,6 +143,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "nomeExercicio": 'Leg press',
         "repeticao": 20,
         "serie": 3,
+        "carga": null,
+        "intervalo": null,
         "categoriaId": {
             "id": 3,
             "nome": "Perda de peso"
@@ -159,6 +159,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "nomeExercicio": 'Cadeira extensora',
         "repeticao": 15,
         "serie": 3,
+        "carga": null,
+        "intervalo": null,
         "categoriaId": {
             "id": 4,
             "nome": "Flexibilidade"
@@ -178,10 +180,11 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |  200 | Listagem feita com sucesso|
 |  404 | Lista não encontrada|
 
+<hr>
 
-#### Detalhes Avaliação
+### Detalhes Avaliação
 
-`GET` /traintime/api/avaliacao/{id}
+`GET` /traintime/api/avaliador/avaliacao/{id}
 
 *Exemplo de resposta*
 
@@ -198,6 +201,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "nomeExercicio": 'Cadeira extensora',
     "repeticao": 15,
     "serie": 3,
+    "carga": null,
+    "intervalo": null,
     "categoriaId": {
         "id": 4,
         "nome": "Flexibilidade"
@@ -215,3 +220,132 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |--------|---------
 |200| Os dados foram retornados com sucesso
 |404| Não foi encontrado a avaliação com esse ID
+
+<hr>
+
+### Listar Exercícios
+
+`GET` /traintime/api/aluno/exercicios
+
+*Exemplo de resposta*
+
+| Campo        | Tipo   | Descrição|
+|--------------|--------|----------|
+|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|nomeExercicio |texto   | O nome do exercício|
+|serie         |inteiro | A quantidade de séries do exercício|
+|repeticao     |inteiro | A quantidade de repetições do exercício|
+|carga         |inteiro | Carga total utilizada durante o exercício|
+|intervalo     |inteiro | Intervalo de descanso (em segundos) entre as séries|
+
+
+```
+[
+    {
+        "diaDaSemanaId": {
+            "id": 1,
+            "nome": "Segunda-feira"
+        },
+        "nomeExercicio": "Remada Baixa",
+        "serie": 3,
+        "repeticao": 15,
+        "carga": null,
+        "intervalo": null
+    },
+    {
+        "diaDaSemanaId": {
+            "id": 2,
+            "nome": "Terça-feira"
+        },
+        "nomeExercicio": "Supino Vertical",
+        "serie": 3,
+        "repeticao": 15,
+        "carga": null,
+        "intervalo": null
+    },
+    {
+        "diaDaSemanaId": {
+            "id": 3,
+            "nome": "Quarta-feira"
+        },
+        "nomeExercicio": "Mesa Flexora",
+        "serie": 3,
+        "repeticao": 15,
+        "carga": null,
+        "intervalo": null
+    },
+]
+```
+
+*Resposta*
+|código|descrição|
+|:----:|---------|
+|  200 | Listagem feita com sucesso|
+|  404 | Lista não encontrada|
+
+<hr>
+
+### Detalhes Exercícios
+
+`GET` /traintime/api/aluno/exercicios/{id}
+
+*Exemplo de resposta*
+
+| Campo        | Tipo   | Descrição|
+|--------------|--------|----------|
+|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|nomeExercicio |texto   | O nome do exercício|
+|serie         |inteiro | A quantidade de séries do exercício|
+|repeticao     |inteiro | A quantidade de repetições do exercício|
+|carga         |inteiro | Carga total utilizada durante o exercício|
+|intervalo     |inteiro | Intervalo de descanso (em segundos) entre as séries|
+
+
+```
+{
+    "diaDaSemanaId": {
+        "id": 1,
+        "nome": "Segunda-feira"
+    },
+    "nomeExercicio": "Remada Baixa",
+    "serie": 3,
+    "repeticao": 15,
+    "carga": null,
+    "intervalo": null
+}
+```
+
+*Resposta*
+|código|descrição|
+|:----:|---------|
+|200| Os dados foram retornados com sucesso
+|404| Não foi encontrado a avaliação com esse ID
+
+<hr>
+
+### Alterar Exercícios
+
+`PUT` /traintime/api/aluno/exercicio/{id}
+
+*Campos de requisição*
+
+| Campo     | Tipo   | Obrigatório | Descrição|
+|-----------|--------|:-----------:|----------|
+|repeticao  |inteiro |não| A quantidade de repetições do exercicio|
+|carga      |inteiro |sim| A carga (peso em Kg) que será utilizada no exercício|
+|intervalo  |inteiro |sim| O intervalo de descanso em segundos entre as séries do exercício|
+
+```
+{
+    "repeticao": 20,
+    "carga": 10,
+    "intervalo": 10
+}
+```
+
+*Corpo resposta*
+|código|descrição|
+|:----:|---------|
+|200| Alteração feita com sucesso|
+|400| Alteração inválida|
+|404| Alteração não encontrada|
