@@ -28,33 +28,28 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Cadastrar Avaliação 
 
-`POST` /traintime/api/avaliador/avaliacao
+`POST` /traintime/api/{avaliador}/avaliacao
+
 
 *Campos da requisição*
 
 | Campo        | Tipo   | Obrigatório | Descrição|
 |--------------|--------|:-----------:|----------|
 |nomeExercicio |texto   |sim| Um texto informando o nome do exercicio|
-|repeticao     |inteiro |sim| A quantidade de repetições do exercicio|
-|serie         |inteiro |sim| Quantas séries terão o exercicio|
-|categoriaId   |objeto  |sim| O id de uma categoria previamente cadastrada|
-|diaDaSemanaId |objeto  |sim| O id de um dia da semana previamente cadastrada|
+|qtdDeRepeticoes|inteiro |sim| A quantidade de repetições do exercicio|
+|qtdSerie      |inteiro |sim| Quantas séries terão o exercicio|
+|categoriaId   |inteiro |sim| O id de uma categoria previamente cadastrada|
+|diaDaSemanaId |inteiro |sim| O id de um dia da semana previamente cadastrada|
 
 ```
 {
     "nomeExercicio": 'Remada baixa',
-    "repeticao": 15,
-    "serie": 3,
-    "carga": null,
-    "intervalo": null,
-    "categoriaId": {
-        id: 1,
-        "nome": "Treinamento de força"
-    },
-    "diaDaSemanaId": {
-        "id": 0,
-        "nome": "Domingo"
-    }
+    "qtdDeRepeticoes": 15,
+    "qtdSerie": 3,
+    "cargaTotal": null,
+    "Descanso": null,
+    "categoriaId": 1,
+    "diaDaSemanaId": 0
 }
 ```
 
@@ -68,33 +63,27 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Alterar Avaliação
 
-`PUT` /traintime/api/avaliador/avaliacao/{id}
+`PUT` /traintime/api/{avaliador}/avaliacao/{id}
 
 *Campos de requisição*
 
 | Campo        | Tipo   | Obrigatório | Descrição|
 |--------------|--------|:-----------:|----------|
 |nomeExercicio |texto   |não| Um texto informando o nome do exercicio|
-|repeticao     |inteiro |não| A quantidade de repetições do exercicio|
-|serie         |inteiro |não| Quantas séries terão o exercicio|
-|categoriaId   |objeto |não| O id de uma categoria previamente cadastrada|
-|diaDaSemanaId |objeto |não| O id de um dia da semana previamente cadastrada|
+|qtdDeRepeticoes     |inteiro |não| A quantidade de repetições do exercicio|
+|qtdSerie         |inteiro |não| Quantas séries terão o exercicio|
+|categoriaId   |inteiro |não| O id de uma categoria previamente cadastrada|
+|diaDaSemanaId |inteiro |não| O id de um dia da semana previamente cadastrada|
 
 ```
 {
     "nomeExercicio": 'Remada Baixa',
-    "repeticao": 15,
-    "serie": 3,
-    "carga": null,
-    "intervalo": null,
-    "categoriaId": {
-        "id": 2,
-        "nome": "Cardiovascular"
-    },
-    "diaDaSemanaId": {
-        "id": 2,
-        "nome": "Terça-feira"
-    }
+    "qtdDeRepeticoes": 15,
+    "qtdSerie": 3,
+    "cargaTotal": null,
+    "intervaloDescanso": null,
+    "categoriaId": 1,
+    "diaDaSemanaId": 2
 }
 ```
 
@@ -109,66 +98,48 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Listar Avaliação
 
-`GET` /traintime/api/avaliador/avaliacao
+`GET` /traintime/api/{avaliador}/avaliacao
 
 *Exemplo de resposta*
 
 | Campo        | Tipo   | Descrição|
 |--------------|--------|----------|
 |nomeExercicio |texto   | O nome do exercício|
-|repeticao     |inteiro | A quantidade de repetições do exercício|
-|serie         |inteiro | A quantidade de séries do exercício|
-|categoriaId   |objeto  | Objeto que contém informações da categoria do exercício|
-|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
+|qtdSerie         |inteiro | A quantidade de séries do exercício|
+|categoriaId   |inteiro  | O id de uma categoria previamente cadastrada|
+|diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
 
 ```
 [
     {
         "nomeExercicio": 'Remada Baixa',
-        "repeticao": 15,
-        "serie": 3,
-        "carga": null,
-        "intervalo": null,
-        "categoria": {
-            "id": 2,
-            "nome": "Cardiovascular"
-        },
-        "diaDaSemana": {
-            "id": 2,
-            "nome": "Terça-feira"
-        }
+        "qtdDeRepeticoes": 15,
+        "qtdSerie": 3,
+        "cargaTotal": null,
+        "intervaloDescanso": null,
+        "categoriaId": 2,
+        "diaDaSemana": 2
     },
 
     {
         "nomeExercicio": 'Leg press',
-        "repeticao": 20,
-        "serie": 3,
-        "carga": null,
-        "intervalo": null,
-        "categoriaId": {
-            "id": 3,
-            "nome": "Perda de peso"
-        },
-        "diaDaSemanaId": {
-            "id": 3,
-            "nome": "Quarta-feira"
-        }
+        "qtdDeRepeticoes": 20,
+        "qtdSerie": 3,
+        "cargaTotal": null,
+        "intervaloDescanso": null,
+        "categoriaId": 3,
+        "diaDaSemanaId": 3
     },
 
     {
         "nomeExercicio": 'Cadeira extensora',
-        "repeticao": 15,
-        "serie": 3,
-        "carga": null,
-        "intervalo": null,
-        "categoriaId": {
-            "id": 4,
-            "nome": "Flexibilidade"
-        },
-        "diaDaSemana": {
-            "id": 6,
-            "nome": "Sábado"
-        }
+        "qtdDeRepeticoes": 15,
+        "qtdSerie": 3,
+        "cargaTotal": null,
+        "intervaloDescanso": null,
+        "categoriaId": 4,
+        "diaDaSemana": 6
     }
 ]
 ```
@@ -184,33 +155,27 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Detalhes Avaliação
 
-`GET` /traintime/api/avaliador/avaliacao/{id}
+`GET` /traintime/api/{avaliador}/avaliacao/{id}
 
 *Exemplo de resposta*
 
 | Campo        | Tipo   | Descrição|
 |--------------|--------|----------|
 |nomeExercicio |texto   | O nome do exercício|
-|repeticao     |inteiro | A quantidade de repetições do exercício|
-|serie         |inteiro | A quantidade de séries do exercício|
-|categoriaId   |objeto  | Objeto que contém informações da categoria do exercício|
-|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
+|qtdSerie         |inteiro | A quantidade de séries do exercício|
+|categoriaId   |inteiro  | O id de uma categoria previamente cadastrada|
+|diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
 
 ```
 {
     "nomeExercicio": 'Cadeira extensora',
-    "repeticao": 15,
-    "serie": 3,
-    "carga": null,
-    "intervalo": null,
-    "categoriaId": {
-        "id": 4,
-        "nome": "Flexibilidade"
-    },
-    "diaDaSemana": {
-        "id": 1,
-        "nome": "Segunda"
-    }
+    "qtdDeRepeticoes": 15,
+    "qtdSerie": 3,
+    "cargaTotal": null,
+    "intervaloDescanso": null,
+    "categoriaId": 5,
+    "diaDaSemana": 1
 }
 ```
 
@@ -225,54 +190,45 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Listar Exercícios
 
-`GET` /traintime/api/aluno/exercicios
+`GET` /traintime/api/{aluno}/exercicios
 
 *Exemplo de resposta*
 
 | Campo        | Tipo   | Descrição|
 |--------------|--------|----------|
-|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
 |nomeExercicio |texto   | O nome do exercício|
-|serie         |inteiro | A quantidade de séries do exercício|
-|repeticao     |inteiro | A quantidade de repetições do exercício|
-|carga         |inteiro | Carga total utilizada durante o exercício|
-|intervalo     |inteiro | Intervalo de descanso (em segundos) entre as séries|
+|qtdSerie         |inteiro | A quantidade de séries do exercício|
+|qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
+|cargaTotal         |inteiro | cargaTotal total utilizada durante o exercício|
+|intervaloDescanso     |inteiro | intervaloDescanso de descanso (em segundos) entre as séries|
 
 
 ```
 [
     {
-        "diaDaSemanaId": {
-            "id": 1,
-            "nome": "Segunda-feira"
-        },
+        "diaDaSemanaId": 1,
         "nomeExercicio": "Remada Baixa",
-        "serie": 3,
-        "repeticao": 15,
-        "carga": null,
-        "intervalo": null
+        "qtdSerie": 3,
+        "qtdDeRepeticoes": 15,
+        "cargaTotal": null,
+        "intervaloDescanso": null
     },
     {
-        "diaDaSemanaId": {
-            "id": 2,
-            "nome": "Terça-feira"
-        },
+        "diaDaSemanaId": 2,
         "nomeExercicio": "Supino Vertical",
-        "serie": 3,
-        "repeticao": 15,
-        "carga": null,
-        "intervalo": null
+        "qtdSerie": 3,
+        "qtdDeRepeticoes": 15,
+        "cargaTotal": null,
+        "intervaloDescanso": null
     },
     {
-        "diaDaSemanaId": {
-            "id": 3,
-            "nome": "Quarta-feira"
-        },
+        "diaDaSemanaId": 3,
         "nomeExercicio": "Mesa Flexora",
-        "serie": 3,
-        "repeticao": 15,
-        "carga": null,
-        "intervalo": null
+        "qtdSerie": 3,
+        "qtdDeRepeticoes": 15,
+        "cargaTotal": null,
+        "intervaloDescanso": null
     },
 ]
 ```
@@ -287,31 +243,28 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Detalhes Exercícios
 
-`GET` /traintime/api/aluno/exercicios/{id}
+`GET` /traintime/api/{aluno}/exercicios/{id}
 
 *Exemplo de resposta*
 
 | Campo        | Tipo   | Descrição|
 |--------------|--------|----------|
-|diaDaSemanaId |objeto  | Objeto que contém informações do dia da semana da avaliação|
+|diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
 |nomeExercicio |texto   | O nome do exercício|
-|serie         |inteiro | A quantidade de séries do exercício|
-|repeticao     |inteiro | A quantidade de repetições do exercício|
-|carga         |inteiro | Carga total utilizada durante o exercício|
-|intervalo     |inteiro | Intervalo de descanso (em segundos) entre as séries|
+|qtdSerie         |inteiro | A quantidade de séries do exercício|
+|qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
+|cargaTotal         |inteiro | cargaTotal total utilizada durante o exercício|
+|intervaloDescanso     |inteiro | intervaloDescanso de descanso (em segundos) entre as séries|
 
 
 ```
 {
-    "diaDaSemanaId": {
-        "id": 1,
-        "nome": "Segunda-feira"
-    },
+    "diaDaSemanaId": 1,
     "nomeExercicio": "Remada Baixa",
-    "serie": 3,
-    "repeticao": 15,
-    "carga": null,
-    "intervalo": null
+    "qtdSerie": 3,
+    "qtdDeRepeticoes": 15,
+    "cargaTotal": null,
+    "intervaloDescanso": null
 }
 ```
 
@@ -325,21 +278,21 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 ### Alterar Exercícios
 
-`PUT` /traintime/api/aluno/exercicio/{id}
+`PUT` /traintime/api/{aluno}/exercicio/{id}
 
 *Campos de requisição*
 
 | Campo     | Tipo   | Obrigatório | Descrição|
 |-----------|--------|:-----------:|----------|
-|repeticao  |inteiro |não| A quantidade de repetições do exercicio|
-|carga      |inteiro |sim| A carga (peso em Kg) que será utilizada no exercício|
-|intervalo  |inteiro |sim| O intervalo de descanso em segundos entre as séries do exercício|
+|qtdDeRepeticoes  |inteiro |não| A quantidade de repetições do exercicio|
+|cargaTotal      |inteiro |sim| A cargaTotal (peso em Kg) que será utilizada no exercício|
+|intervaloDescanso  |inteiro |sim| O intervaloDescanso de descanso em segundos entre as séries do exercício|
 
 ```
 {
-    "repeticao": 20,
-    "carga": 10,
-    "intervalo": 10
+    "qtdDeRepeticoes": 20,
+    "cargaTotal": 10,
+    "intervaloDescanso": 10
 }
 ```
 
