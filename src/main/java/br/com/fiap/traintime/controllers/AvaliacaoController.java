@@ -21,15 +21,5 @@ public class AvaliacaoController {
             20,
             15
         );
-
-        /* return new Exercicio(
-            "Leg press", 
-            15,
-            3, 
-            CategoriaDeExercicio.NUNCA_FEZ_MUSCULACAO, 
-            DiaDaSemana.SEGUNDA_FEIRA, 
-            20, 
-            15
-        ); */
     }
 }
