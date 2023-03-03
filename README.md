@@ -200,8 +200,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |nomeExercicio |texto   | O nome do exercício|
 |qtdSerie         |inteiro | A quantidade de séries do exercício|
 |qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
-|cargaTotal         |inteiro | cargaTotal total utilizada durante o exercício|
-|intervaloDescanso     |inteiro | intervaloDescanso de descanso (em segundos) entre as séries|
+|cargaTotal         |inteiro | CargaTotal total utilizada durante o exercício|
+|intervaloDescanso     |inteiro | IntervaloDescanso de descanso (em segundos) entre as séries|
 
 
 ```
@@ -253,8 +253,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |nomeExercicio |texto   | O nome do exercício|
 |qtdSerie         |inteiro | A quantidade de séries do exercício|
 |qtdDeRepeticoes     |inteiro | A quantidade de repetições do exercício|
-|cargaTotal         |inteiro | cargaTotal total utilizada durante o exercício|
-|intervaloDescanso     |inteiro | intervaloDescanso de descanso (em segundos) entre as séries|
+|cargaTotal         |inteiro | CargaTotal total utilizada durante o exercício|
+|intervaloDescanso     |inteiro | IntervaloDescanso de descanso (em segundos) entre as séries|
 
 
 ```
