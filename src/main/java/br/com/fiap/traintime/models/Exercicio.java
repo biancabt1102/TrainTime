@@ -11,6 +11,7 @@ public class Exercicio {
     private DiaDaSemana diaDaSemanaId;
     private int cargaDoExercicio;
     private int intervaloDoExercicio;
+    private Long idExercicio;
 
     public Exercicio(){
 
@@ -25,6 +26,14 @@ public class Exercicio {
             this.diaDaSemanaId = diaDaSemanaId;
             this.cargaDoExercicio = cargaDoExercicio;
             this.intervaloDoExercicio = intervaloDoExercicio;
+    }
+
+    public Long getIdExercicio() {
+        return idExercicio;
+    }
+
+    public void setIdExercicio(Long idExercicio){
+        this.idExercicio = idExercicio;
     }
 
     public String getNomeDoExercicio() {

@@ -16,6 +16,7 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     - [Listar todos](#listar-avaliação)
     - [Alterar](#alterar-avaliação)
     - [Detalhes](#detalhes-avaliação)
+    - [Excluir](#excluir-avaliação)
 
 <h3 style="font-size: 18px"> Aluno </h3>
 
@@ -40,6 +41,7 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |qtdSerie      |inteiro |sim| Quantas séries terão o exercicio|
 |categoriaId   |inteiro |sim| O id de uma categoria previamente cadastrada|
 |diaDaSemanaId |inteiro |sim| O id de um dia da semana previamente cadastrada|
+|idExercicio   |Long    |sim| O id de um exercício previamente criado|
 
 ```
 {
@@ -49,7 +51,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "cargaTotal": null,
     "Descanso": null,
     "categoriaId": 1,
-    "diaDaSemanaId": 0
+    "diaDaSemanaId": 0,
+    "idExercicio": 1
 }
 ```
 
@@ -69,11 +72,12 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 
 | Campo        | Tipo   | Obrigatório | Descrição|
 |--------------|--------|:-----------:|----------|
-|nomeExercicio |texto   |não| Um texto informando o nome do exercicio|
-|qtdDeRepeticoes     |inteiro |não| A quantidade de repetições do exercicio|
-|qtdSerie         |inteiro |não| Quantas séries terão o exercicio|
-|categoriaId   |inteiro |não| O id de uma categoria previamente cadastrada|
-|diaDaSemanaId |inteiro |não| O id de um dia da semana previamente cadastrada|
+|nomeExercicio  |texto   |não| Um texto informando o nome do exercicio|
+|qtdDeRepeticoes|inteiro |não| A quantidade de repetições do exercicio|
+|qtdSerie       |inteiro |não| Quantas séries terão o exercicio|
+|categoriaId    |inteiro |não| O id de uma categoria previamente cadastrada|
+|diaDaSemanaId  |inteiro |não| O id de um dia da semana previamente cadastrada|
+|idExercicio    |Long    |sim| O id de um exercício previamente criado|
 
 ```
 {
@@ -83,7 +87,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "cargaTotal": null,
     "intervaloDescanso": null,
     "categoriaId": 1,
-    "diaDaSemanaId": 2
+    "diaDaSemanaId": 2,
+    "idExercicio": 1
 }
 ```
 
@@ -109,6 +114,7 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |qtdSerie         |inteiro | A quantidade de séries do exercício|
 |categoriaId   |inteiro  | O id de uma categoria previamente cadastrada|
 |diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
+|idExercicio   |Long    |sim| O id de um exercício previamente criado|
 
 ```
 [
@@ -119,7 +125,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "cargaTotal": null,
         "intervaloDescanso": null,
         "categoriaId": 2,
-        "diaDaSemana": 2
+        "diaDaSemana": 2,
+        "idExercicio": 1
     },
 
     {
@@ -129,7 +136,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "cargaTotal": null,
         "intervaloDescanso": null,
         "categoriaId": 3,
-        "diaDaSemanaId": 3
+        "diaDaSemanaId": 3,
+        "idExercicio": 2
     },
 
     {
@@ -139,7 +147,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
         "cargaTotal": null,
         "intervaloDescanso": null,
         "categoriaId": 4,
-        "diaDaSemana": 6
+        "diaDaSemana": 6,
+        "idExercicio": 3
     }
 ]
 ```
@@ -166,6 +175,7 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |qtdSerie         |inteiro | A quantidade de séries do exercício|
 |categoriaId   |inteiro  | O id de uma categoria previamente cadastrada|
 |diaDaSemanaId |inteiro  | O id de um dia da semana previamente cadastrada|
+|idExercicio   |Long    |sim| O id de um exercício previamente criado|
 
 ```
 {
@@ -175,7 +185,8 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
     "cargaTotal": null,
     "intervaloDescanso": null,
     "categoriaId": 5,
-    "diaDaSemana": 1
+    "diaDaSemana": 1,
+    "idExercicio": 1
 }
 ```
 
@@ -187,6 +198,16 @@ O sistema funcionará por meio de um aplicativo que será instalado no celular d
 |404| Não foi encontrado a avaliação com esse ID
 
 <hr>
+
+### Excluir Avaliação
+
+`DELETE` /traintime/api/{avaliador}/avaliacao/{id}
+
+
+*Resposta*
+|código|descrição|
+|------|---------|
+|204| Conteúdo não encontrado|
 
 ### Listar Exercícios
 
