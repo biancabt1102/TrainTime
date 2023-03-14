@@ -24,8 +24,11 @@ public class AvaliacaoController {
 
     private List<Exercicio> exercicios = new ArrayList<>();
 
+    //Avaliador
     @PostMapping("/traintime/api/{avaliador}/avaliacao")
     public ResponseEntity<Exercicio> create(@PathVariable("avaliador") String avaliador, @RequestBody Exercicio exercicio){
+        exercicio.setCargaDoExercicio(0);
+        exercicio.setIntervaloDoExercicio(0);
         log.info("Cadastro de Avaliação: " + exercicio);
         exercicio.setIdExercicio(exercicios.size() + 1l);
         exercicios.add(exercicio);
@@ -38,13 +41,14 @@ public class AvaliacaoController {
         return exercicios;
     }
 
-    //avaliador
     @GetMapping("/traintime/api/avaliacao/{id}")
     public ResponseEntity<Exercicio> show(@PathVariable Long id){
         log.info("Buscar avaliação: " + id);
         
+        // Encontra a avaliação existente pelo ID informado
         var avaliacaoEncontrada = findAvaliacaoById(id);
 
+        // Retorna NOT FOUND caso não exista avaliação com o ID informado
         if(avaliacaoEncontrada == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -52,9 +56,33 @@ public class AvaliacaoController {
         return ResponseEntity.ok(avaliacaoEncontrada);
     }
 
-    //avaliador
-    @PutMapping("/traintime/api/avaliacao/{id}")
-    public ResponseEntity<Exercicio> update(@PathVariable Long id, @RequestBody Exercicio exercicio){
+    // Avaliador
+    // Atualiza avaliação de um avaliador para um determinado exercício
+    @PutMapping("/traintime/api/{avaliador}/avaliacao/{id}")
+    public ResponseEntity<Exercicio> updateAvaliador(@PathVariable Long id, @RequestBody Exercicio exercicio) {
+        log.info("Update de avaliação do avaliador: " + id);
+
+        var avaliacaoEncontrada = findAvaliacaoById(id);
+
+        if (avaliacaoEncontrada == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        // Esses campos não são atualizados na avaliação
+        exercicio.setCargaDoExercicio(0);
+        exercicio.setIntervaloDoExercicio(0);
+
+        exercicios.remove(avaliacaoEncontrada);
+        exercicio.setIdExercicio(id);
+        exercicios.add(exercicio);
+
+        return ResponseEntity.ok(exercicio);
+    }
+
+    //Aluno
+    //Atualiza os dados de um exercício feito por um aluno.
+    @PutMapping("/traintime/api/{aluno}/exercicio/{id}")
+    public ResponseEntity<Exercicio> updateAluno(@PathVariable("aluno") String aluno, @PathVariable Long id, @RequestBody Exercicio exercicio){
         log.info("Update de avaliação: " + id);
 
         var avaliacaoEncontrada = findAvaliacaoById(id);
@@ -63,14 +91,18 @@ public class AvaliacaoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        exercicios.remove(avaliacaoEncontrada);
-        exercicio.setIdExercicio(id);
-        exercicios.add(exercicio);
+        // Atualiza a avaliação com os dados do exercício recebido no request
+        avaliacaoEncontrada.setQtdRepeticoes(exercicio.getQtdRepeticoes());
+        avaliacaoEncontrada.setQtdSeries(exercicio.getQtdSeries());
+        avaliacaoEncontrada.setCargaDoExercicio(exercicio.getCargaDoExercicio());
+        avaliacaoEncontrada.setIntervaloDoExercicio(exercicio.getIntervaloDoExercicio());
 
-        return ResponseEntity.ok(exercicio);
+        return ResponseEntity.ok(avaliacaoEncontrada);
     }
+
+
     
-    //avaliador
+    //Avaliador
     @DeleteMapping("/traintime/api/avaliacao/{id}")
     public ResponseEntity<Exercicio> delete(@PathVariable Long id){
         log.info("Delete de avaliação: " + id);
@@ -85,6 +117,7 @@ public class AvaliacaoController {
         return ResponseEntity.noContent().build();
     }
 
+    // Esse método encontra um Exercicio pelo seu ID na lista de exercícios
     private Exercicio findAvaliacaoById(Long id) {
         var avaliacaoEncontrada = exercicios.stream().filter(d -> d.getIdExercicio().equals(id)).findFirst();
         if (avaliacaoEncontrada.isPresent()) {
